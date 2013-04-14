@@ -1,6 +1,8 @@
 !!!
 head
   title Black and white dev page
+
+  // Set up some poor color choices
   style
     body {
       background: red;
@@ -10,6 +12,23 @@ head
     p {
       color: blue;
     }
+
+  // Load in black-and-white.js
+  script(src="../lib/black-and-white.js")
+
+  // Load in File-Watcher
+  script(src="https://raw.github.com/twolfson/File-Watcher/master/src/watcher.js")
+  script(src="https://raw.github.com/twolfson/Resource-Collector/master/src/collector.js")
+  script
+      (function () {
+         var watcher = new FileWatcher(),
+             resources = ResourceCollector.collect();
+         watcher.addListener(function () {
+           location.reload();
+         });
+         watcher.watch(resources);
+      }());
+
 body
   h1 Hello World!
   p Some text.
